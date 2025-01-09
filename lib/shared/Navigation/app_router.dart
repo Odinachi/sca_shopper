@@ -1,9 +1,44 @@
 import 'package:flutter/cupertino.dart';
+import 'package:sca_shopper/features/authentication/views/login_screen.dart';
+import 'package:sca_shopper/features/authentication/views/register_screen.dart';
+import 'package:sca_shopper/features/home/views/home_screen.dart';
+import 'package:sca_shopper/features/products/views/product_details.dart';
+import 'package:sca_shopper/shared/Navigation/app_route_strings.dart';
 
 class AppRouter {
   static final navKey = GlobalKey<NavigatorState>();
 
   static Route onGenerateRoute(RouteSettings settings) {
-    return CupertinoPageRoute(builder: (_) => SizedBox());
+    switch (settings.name) {
+      case AppRouteStrings.base:
+        return CupertinoPageRoute(builder: (_) => const LoginScreen());
+      case AppRouteStrings.loginScreen:
+        return CupertinoPageRoute(builder: (_) => const LoginScreen());
+      case AppRouteStrings.registerScreen:
+        return CupertinoPageRoute(builder: (_) => const RegisterScreen());
+      case AppRouteStrings.homeScreen:
+        return CupertinoPageRoute(builder: (_) => const HomeScreen());
+      case AppRouteStrings.productDetailsScreen:
+        return CupertinoPageRoute(builder: (_) => const ProductDetailsScreen());
+
+      default:
+        return CupertinoPageRoute(builder: (_) => const LoginScreen());
+    }
+  }
+
+  static void push(String name, {Object? arg}) {
+    navKey.currentState?.pushNamed(name, arguments: arg);
+  }
+
+  static void pushReplace(String name, {Object? arg}) {
+    navKey.currentState?.pushReplacementNamed(name, arguments: arg);
+  }
+
+  static void pop(String name, {Object? arg}) {
+    navKey.currentState?.pop(arg);
+  }
+
+  static void pushAndClear(String name, {Object? arg}) {
+    navKey.currentState?.pushNamedAndRemoveUntil(name, (_) => false);
   }
 }
