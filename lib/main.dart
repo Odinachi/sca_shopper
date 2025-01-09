@@ -21,7 +21,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: AppRouter.navKey,
       onGenerateRoute: AppRouter.onGenerateRoute,
-      initialRoute: AppRouteStrings.base,
+      initialRoute: CacheService().getToken() != null
+          ? AppRouteStrings.homeScreen
+          : AppRouteStrings.loginScreen,
       title: 'Flutter Demo',
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sca_shopper/models/request_model/login_model.dart';
 import 'package:sca_shopper/repository/api_repository.dart';
 import 'package:sca_shopper/shared/Navigation/app_route_strings.dart';
@@ -47,6 +48,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 AppTextInput(
                   controller: emailController,
                   label: "Email",
+                  inputFormatter: [
+                    FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z@._-]'))
+                  ],
                   validator: (a) {
                     if (!emailRegex.hasMatch(a ?? "")) {
                       return "Inavlid email";
@@ -60,16 +64,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 AppTextInput(
                   controller: passwordController,
                   label: "Password",
+                  inputFormatter: [
+                    FilteringTextInputFormatter.deny(RegExp(r' '))
+                  ],
                   validator: (a) =>
-                      (a ?? '').length > 6 ? null : "Invalid password",
+                      (a ?? '').isNotEmpty ? null : "Invalid password",
                 ),
                 const SizedBox(
                   height: 50,
                 ),
                 if (loading)
-                  const CircularProgressIndicator(
-                    valueColor:
-                        AlwaysStoppedAnimation<Color>(AppColors.appColor),
+                  Center(
+                    child: const CircularProgressIndicator(
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(AppColors.appColor),
+                    ),
                   )
                 else
                   AppButton(

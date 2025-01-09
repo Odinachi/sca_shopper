@@ -10,8 +10,6 @@ class AppRouter {
 
   static Route onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case AppRouteStrings.base:
-        return CupertinoPageRoute(builder: (_) => const LoginScreen());
       case AppRouteStrings.loginScreen:
         return CupertinoPageRoute(builder: (_) => const LoginScreen());
       case AppRouteStrings.registerScreen:

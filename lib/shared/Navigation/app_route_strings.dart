@@ -1,6 +1,4 @@
 class AppRouteStrings {
-  static const base = '/';
-
   static const homeScreen = '/home';
 
   static const loginScreen = '/login';

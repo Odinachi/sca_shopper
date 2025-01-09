@@ -21,6 +21,10 @@ class CacheService {
     await sharedPreference.setString(_accessKey, accessToken);
   }
 
+  Future<void> deleteToken() async {
+    await sharedPreference.remove(_accessKey);
+  }
+
   String? getToken() {
     return sharedPreference.getString(_accessKey);
   }
