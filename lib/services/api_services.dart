@@ -56,7 +56,11 @@ class ApiService {
       }
       return (data: null, error: (request.data['message'] ?? "").toString());
     } catch (e) {
-      return (data: null, error: e.toString());
+      String? msg;
+      if (e is DioException) {
+        msg = e.response?.data["message"];
+      }
+      return (data: null, error: msg ?? e.toString());
     }
   }
 
