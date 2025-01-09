@@ -1,3 +1,4 @@
+import 'package:sca_shopper/models/request_model/login_model.dart';
 import 'package:sca_shopper/models/request_model/register_model.dart';
 import 'package:sca_shopper/models/response_model/user_model.dart';
 import 'package:sca_shopper/services/api_services.dart';
@@ -20,7 +21,7 @@ class ApiRepository {
     }
   }
 
-  Future<({bool? login, String? error})> loginUser(RegisterModel model) async {
+  Future<({bool? login, String? error})> loginUser(LoginModel model) async {
     final req = await apiService.post(
         endpoint: "api/v1/auth/login", data: model.toJson());
     if (req.data != null) {
