@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:sca_shopper/services/cache_service.dart';
 import 'package:sca_shopper/shared/Navigation/app_route_strings.dart';
 import 'package:sca_shopper/shared/Navigation/app_router.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await CacheService().init();
+  
   runApp(const MyApp());
 }
 

@@ -38,6 +38,7 @@ dependencies:
   dio: ^5.7.0
   pretty_dio_logger: ^1.4.0
   flutter_dotenv: ^5.2.1
+  shared_preferences: ^2.3.5
 
 dev_dependencies:
   flutter_test:
