@@ -1,5 +1,6 @@
 import 'package:sca_shopper/models/request_model/login_model.dart';
 import 'package:sca_shopper/models/request_model/register_model.dart';
+import 'package:sca_shopper/models/response_model/category_model.dart';
 import 'package:sca_shopper/models/response_model/user_model.dart';
 import 'package:sca_shopper/services/api_services.dart';
 import 'package:sca_shopper/services/cache_service.dart';
@@ -33,6 +34,18 @@ class ApiRepository {
       return (login: true, error: null);
     } else {
       return (login: false, error: req.error);
+    }
+  }
+
+  Future<({List<CategoryModel>? cats, String? error})> fetchCategories() async {
+    final req = await apiService.get(endpoint: "api/v1/categories?limit=10");
+    if (req.data != null) {
+      final data = req.data as List;
+      final listOfCats =
+          List<CategoryModel>.from(data.map((e) => CategoryModel.fromJson(e)));
+      return (cats: listOfCats, error: null);
+    } else {
+      return (cats: null, error: req.error);
     }
   }
 }
