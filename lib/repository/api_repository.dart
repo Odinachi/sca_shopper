@@ -1,6 +1,7 @@
 import 'package:sca_shopper/models/request_model/login_model.dart';
 import 'package:sca_shopper/models/request_model/register_model.dart';
 import 'package:sca_shopper/models/response_model/category_model.dart';
+import 'package:sca_shopper/models/response_model/product_model.dart';
 import 'package:sca_shopper/models/response_model/user_model.dart';
 import 'package:sca_shopper/services/api_services.dart';
 import 'package:sca_shopper/services/cache_service.dart';
@@ -38,7 +39,7 @@ class ApiRepository {
   }
 
   Future<({List<CategoryModel>? cats, String? error})> fetchCategories() async {
-    final req = await apiService.get(endpoint: "api/v1/categories?limit=10");
+    final req = await apiService.get(endpoint: "api/v1/categories?limit=100");
     if (req.data != null) {
       final data = req.data as List;
       final listOfCats =
@@ -46,6 +47,20 @@ class ApiRepository {
       return (cats: listOfCats, error: null);
     } else {
       return (cats: null, error: req.error);
+    }
+  }
+
+  Future<({List<ProductModel>? products, String? error})> fetchProductsById(
+      String id) async {
+    final req = await apiService.get(
+        endpoint: "api/v1/categories/$id/products?limit=100&offset=0");
+    if (req.data != null) {
+      final data = req.data as List;
+      final listOfCats =
+          List<ProductModel>.from(data.map((e) => ProductModel.fromJson(e)));
+      return (products: listOfCats, error: null);
+    } else {
+      return (products: null, error: req.error);
     }
   }
 }

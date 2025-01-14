@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               onTap: () {
                                 AppRouter.push(
                                     AppRouteStrings.productListScreen,
-                                    arg: each?.id.toString());
+                                    arg: each);
                               },
                               leading: ClipRRect(
                                 borderRadius: BorderRadius.circular(50),
