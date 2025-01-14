@@ -5,6 +5,7 @@ import 'package:sca_shopper/features/home/views/home_screen.dart';
 import 'package:sca_shopper/features/products/views/product_details.dart';
 import 'package:sca_shopper/features/products/views/product_list.dart';
 import 'package:sca_shopper/models/response_model/category_model.dart';
+import 'package:sca_shopper/models/response_model/product_model.dart';
 import 'package:sca_shopper/shared/Navigation/app_route_strings.dart';
 
 class AppRouter {
@@ -19,7 +20,10 @@ class AppRouter {
       case AppRouteStrings.homeScreen:
         return CupertinoPageRoute(builder: (_) => const HomeScreen());
       case AppRouteStrings.productDetailsScreen:
-        return CupertinoPageRoute(builder: (_) => const ProductDetailsScreen());
+        return CupertinoPageRoute(
+            builder: (_) => ProductDetailsScreen(
+                  model: settings.arguments as ProductModel?,
+                ));
       case AppRouteStrings.productListScreen:
         return CupertinoPageRoute(
             builder: (_) => ProductListScreen(

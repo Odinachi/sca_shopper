@@ -3,6 +3,8 @@ import 'package:sca_shopper/models/response_model/category_model.dart';
 import 'package:sca_shopper/shared/colors.dart';
 
 import '../../../repository/api_repository.dart';
+import '../../../shared/Navigation/app_route_strings.dart';
+import '../../../shared/Navigation/app_router.dart';
 import '../../../shared/constants.dart';
 
 class ProductListScreen extends StatefulWidget {
@@ -24,7 +26,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
           iconTheme: IconThemeData(color: AppColors.white),
           backgroundColor: AppColors.appColor,
           title: Text(
-            "Product List",
+            widget.categoryModel?.name ?? "Product List",
             style: style.copyWith(
               fontSize: 20,
               color: AppColors.white,
@@ -38,14 +40,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
             children: [
               const SizedBox(
                 height: 30,
-              ),
-              Text(
-                widget.categoryModel?.name ?? "",
-                style: style.copyWith(
-                  fontSize: 20,
-                  color: AppColors.black,
-                  fontWeight: FontWeight.w600,
-                ),
               ),
               FutureBuilder(
                 builder: (_, snapshot) {
@@ -76,9 +70,9 @@ class _ProductListScreenState extends State<ProductListScreen> {
                               contentPadding:
                                   const EdgeInsets.symmetric(vertical: 15),
                               onTap: () {
-                                // AppRouter.push(
-                                //     AppRouteStrings.productListScreen,
-                                //     arg: each);
+                                AppRouter.push(
+                                    AppRouteStrings.productDetailsScreen,
+                                    arg: each);
                               },
                               leading: ClipRRect(
                                 borderRadius: BorderRadius.circular(50),

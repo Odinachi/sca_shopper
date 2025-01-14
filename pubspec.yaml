@@ -39,6 +39,7 @@ dependencies:
   pretty_dio_logger: ^1.4.0
   flutter_dotenv: ^5.2.1
   shared_preferences: ^2.3.5
+  carousel_slider: ^5.0.0
 
 dev_dependencies:
   flutter_test:
