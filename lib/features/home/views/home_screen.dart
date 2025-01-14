@@ -84,9 +84,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: ListView.separated(
                         itemBuilder: (_, i) {
                           final each = snapshot.data?.cats?[i];
-                          return Row(
-                            children: [
-                              ClipRRect(
+
+                          return ListTile(
+                              contentPadding:
+                                  const EdgeInsets.symmetric(vertical: 15),
+                              onTap: () {
+                                AppRouter.push(
+                                    AppRouteStrings.productListScreen,
+                                    arg: each?.id.toString());
+                              },
+                              leading: ClipRRect(
                                 borderRadius: BorderRadius.circular(50),
                                 child: Image.network(
                                   each?.image ?? "",
@@ -108,20 +115,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                   },
                                 ),
                               ),
-                              TextButton(
-                                  onPressed: () {},
-                                  child: Text(
-                                    each?.name ?? "",
-                                    style: style.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      color: AppColors.appColor,
-                                      fontSize: 15,
-                                    ),
-                                  )),
-                            ],
-                          );
+                              title: Text(
+                                each?.name ?? "",
+                                style: style.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.appColor,
+                                  fontSize: 15,
+                                ),
+                              ));
                         },
-                        separatorBuilder: (_, __) => const Divider(),
+                        separatorBuilder: (_, __) => Divider(
+                              height: 0,
+                            ),
                         itemCount: snapshot.data?.cats?.length ?? 0),
                   );
                 },

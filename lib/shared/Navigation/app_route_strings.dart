@@ -6,4 +6,5 @@ class AppRouteStrings {
   static const registerScreen = '/register';
 
   static const productDetailsScreen = '/product-details';
+  static const productListScreen = '/product-list';
 }

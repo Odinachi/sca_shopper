@@ -3,6 +3,7 @@ import 'package:sca_shopper/features/authentication/views/login_screen.dart';
 import 'package:sca_shopper/features/authentication/views/register_screen.dart';
 import 'package:sca_shopper/features/home/views/home_screen.dart';
 import 'package:sca_shopper/features/products/views/product_details.dart';
+import 'package:sca_shopper/features/products/views/product_list.dart';
 import 'package:sca_shopper/shared/Navigation/app_route_strings.dart';
 
 class AppRouter {
@@ -18,6 +19,10 @@ class AppRouter {
         return CupertinoPageRoute(builder: (_) => const HomeScreen());
       case AppRouteStrings.productDetailsScreen:
         return CupertinoPageRoute(builder: (_) => const ProductDetailsScreen());
+      case AppRouteStrings.productListScreen:
+        return CupertinoPageRoute(
+            builder: (_) =>
+                ProductListScreen(id: settings.arguments as String?));
 
       default:
         return CupertinoPageRoute(builder: (_) => const LoginScreen());

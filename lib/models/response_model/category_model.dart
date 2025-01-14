@@ -1,5 +1,5 @@
 class CategoryModel {
-  final int? id;
+  final num? id;
   final String? name;
   final String? image;
   final DateTime? creationAt;
