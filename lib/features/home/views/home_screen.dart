@@ -28,11 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
           leading: Center(
             child: Consumer<ProductProvider>(
               builder: (_, provider, __) {
-                final items =
-                    provider.productList.map((e) => e.id).toSet().length;
                 return Badge(
                   backgroundColor: Colors.black,
-                  label: Text(items.toString()),
+                  label: Text(provider.map.keys.length.toString()),
                   child: const Icon(
                     Icons.shopping_cart,
                     color: AppColors.white,

@@ -140,10 +140,12 @@ class AddToCart extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
-                provider.productList
-                    .where((e) => e.id == model?.id)
-                    .length
-                    .toString(),
+                // provider.productList
+                //     .where((e) => e.id == model?.id)
+                //     .length
+                //     .toString(),
+
+                (provider.map[model?.id]?.count ?? 0).toString(),
                 style: style.copyWith(
                   fontWeight: FontWeight.w600,
                   color: AppColors.appColor,
