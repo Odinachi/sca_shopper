@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sca_shopper/features/products/view_models/product_provider.dart';
 import 'package:sca_shopper/services/cache_service.dart';
 import 'package:sca_shopper/shared/Navigation/app_route_strings.dart';
 import 'package:sca_shopper/shared/Navigation/app_router.dart';
@@ -24,13 +26,19 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         appBar: AppBar(
           leading: Center(
-            child: Badge(
-              backgroundColor: Colors.black,
-              label: Text(10.toString()),
-              child: const Icon(
-                Icons.shopping_cart,
-                color: AppColors.white,
-              ),
+            child: Consumer<ProductProvider>(
+              builder: (_, provider, __) {
+                final items =
+                    provider.productList.map((e) => e.id).toSet().length;
+                return Badge(
+                  backgroundColor: Colors.black,
+                  label: Text(items.toString()),
+                  child: const Icon(
+                    Icons.shopping_cart,
+                    color: AppColors.white,
+                  ),
+                );
+              },
             ),
           ),
           backgroundColor: AppColors.appColor,
