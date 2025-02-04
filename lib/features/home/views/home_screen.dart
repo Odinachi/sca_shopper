@@ -23,6 +23,16 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading: Center(
+            child: Badge(
+              backgroundColor: Colors.black,
+              label: Text(10.toString()),
+              child: const Icon(
+                Icons.shopping_cart,
+                color: AppColors.white,
+              ),
+            ),
+          ),
           backgroundColor: AppColors.appColor,
           title: Text(
             "Home Screen",

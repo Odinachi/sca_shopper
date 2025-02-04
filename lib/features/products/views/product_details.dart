@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sca_shopper/features/products/view_models/product_provider.dart';
 import 'package:sca_shopper/models/response_model/product_model.dart';
 import 'package:sca_shopper/shared/constants.dart';
 
@@ -19,6 +21,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: AppColors.white),
@@ -78,13 +81,19 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   fontSize: 20,
                 ),
               ),
-              Text(
-                widget.model?.price?.convertToNaira() ?? "",
-                style: style.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.appColor,
-                  fontSize: 20,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    widget.model?.price?.convertToNaira() ?? "",
+                    style: style.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.appColor,
+                      fontSize: 20,
+                    ),
+                  ),
+                  AddToCart(model: widget.model)
+                ],
               ),
               const SizedBox(
                 height: 20,
@@ -101,6 +110,59 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class AddToCart extends StatelessWidget {
+  const AddToCart({
+    super.key,
+    required this.model,
+  });
+
+  final ProductModel? model;
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<ProductProvider>(
+      builder: (_, provider, __) {
+        return Row(
+          children: [
+            InkWell(
+              onTap: () {
+                provider.addItem(model);
+              },
+              child: Icon(
+                Icons.add_circle_outline,
+                size: 30,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
+                provider.productList
+                    .where((e) => e.id == model?.id)
+                    .length
+                    .toString(),
+                style: style.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.appColor,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                provider.removeItem(model);
+              },
+              child: Icon(
+                Icons.remove_circle_outline,
+                size: 30,
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

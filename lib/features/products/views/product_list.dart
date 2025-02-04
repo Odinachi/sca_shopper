@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sca_shopper/features/products/views/product_details.dart';
 import 'package:sca_shopper/models/response_model/category_model.dart';
 import 'package:sca_shopper/shared/colors.dart';
 
@@ -124,6 +125,12 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                       color: AppColors.black.withOpacity(.4),
                                       fontSize: 12,
                                     ),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  AddToCart(
+                                    model: each,
                                   ),
                                 ],
                               ));
