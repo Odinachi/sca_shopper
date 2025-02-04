@@ -28,12 +28,18 @@ class _HomeScreenState extends State<HomeScreen> {
           leading: Center(
             child: Consumer<ProductProvider>(
               builder: (_, provider, __) {
-                return Badge(
-                  backgroundColor: Colors.black,
-                  label: Text(provider.map.keys.length.toString()),
-                  child: const Icon(
-                    Icons.shopping_cart,
-                    color: AppColors.white,
+                return InkWell(
+                  onDoubleTap: () {
+                    provider.clearCart();
+                  },
+                  child: Badge(
+                    isLabelVisible: provider.map.keys.isNotEmpty,
+                    backgroundColor: Colors.black,
+                    label: Text(provider.map.keys.length.toString()),
+                    child: const Icon(
+                      Icons.shopping_cart,
+                      color: AppColors.white,
+                    ),
                   ),
                 );
               },
