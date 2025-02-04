@@ -29,7 +29,10 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Consumer<ProductProvider>(
               builder: (_, provider, __) {
                 return InkWell(
-                  onDoubleTap: () {
+                  onTap: () {
+                    AppRouter.push(AppRouteStrings.checkoutScreen);
+                  },
+                  onLongPress: () {
                     provider.clearCart();
                   },
                   child: Badge(
@@ -45,7 +48,6 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
           ),
-          backgroundColor: AppColors.appColor,
           title: Text(
             "Home Screen",
             style: style.copyWith(

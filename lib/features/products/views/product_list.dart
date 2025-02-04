@@ -24,8 +24,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: AppColors.white),
-          backgroundColor: AppColors.appColor,
           title: Text(
             widget.categoryModel?.name ?? "Product List",
             style: style.copyWith(

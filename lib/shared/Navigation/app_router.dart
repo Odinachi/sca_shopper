@@ -8,6 +8,8 @@ import 'package:sca_shopper/models/response_model/category_model.dart';
 import 'package:sca_shopper/models/response_model/product_model.dart';
 import 'package:sca_shopper/shared/Navigation/app_route_strings.dart';
 
+import '../../features/products/views/checkout_screen.dart';
+
 class AppRouter {
   static final navKey = GlobalKey<NavigatorState>();
 
@@ -19,6 +21,9 @@ class AppRouter {
         return CupertinoPageRoute(builder: (_) => const RegisterScreen());
       case AppRouteStrings.homeScreen:
         return CupertinoPageRoute(builder: (_) => const HomeScreen());
+
+      case AppRouteStrings.checkoutScreen:
+        return CupertinoPageRoute(builder: (_) => const CheckoutScreen());
       case AppRouteStrings.productDetailsScreen:
         return CupertinoPageRoute(
             builder: (_) => ProductDetailsScreen(

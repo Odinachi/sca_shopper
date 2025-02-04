@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:sca_shopper/services/cache_service.dart';
 import 'package:sca_shopper/shared/Navigation/app_route_strings.dart';
 import 'package:sca_shopper/shared/Navigation/app_router.dart';
+import 'package:sca_shopper/shared/colors.dart';
 
 import 'features/products/view_models/product_provider.dart';
 
@@ -29,6 +30,11 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         navigatorKey: AppRouter.navKey,
+        theme: ThemeData(
+            appBarTheme: AppBarTheme(
+          iconTheme: IconThemeData(color: AppColors.white),
+          backgroundColor: AppColors.appColor,
+        )),
         onGenerateRoute: AppRouter.onGenerateRoute,
         initialRoute: CacheService().getToken() != null
             ? AppRouteStrings.homeScreen

@@ -23,10 +23,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: AppColors.white),
-        backgroundColor: AppColors.appColor,
-      ),
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: SingleChildScrollView(
