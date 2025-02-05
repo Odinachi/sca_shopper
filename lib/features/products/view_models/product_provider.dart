@@ -28,6 +28,11 @@ class ProductProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void deleteProductFromCart(num? id) {
+    _map.remove(id ?? 0);
+    notifyListeners();
+  }
+
   void removeItem(ProductModel? item) {
     if (item != null && _map[item.id] != null) {
       // final index = _products.indexWhere((e) => e.id == item.id);

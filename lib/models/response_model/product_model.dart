@@ -1,4 +1,5 @@
 import 'package:sca_shopper/models/response_model/category_model.dart';
+import 'package:sca_shopper/shared/constants.dart';
 
 class ProductModel {
   final num? id;
@@ -24,7 +25,7 @@ class ProductModel {
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
         id: json["id"],
         title: json["title"],
-        price: json["price"],
+        price: ((json["price"] as num?) ?? 0).convertToNairaDouble(),
         description: json["description"],
         images: json["images"] == null
             ? []
