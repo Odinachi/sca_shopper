@@ -32,15 +32,31 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         //   total += ((e?.count ?? 0) * (e?.model.price ?? 0));
         // });
 
-        num total = provider.map.values
-            //this returns List<num>
-            .map((a) => (a?.count ?? 0) * (a?.model.price ?? 0))
-            //this returns all the added num
-            .reduce((z, c) {
-          return z + c;
-        });
+        num total = provider.map.isEmpty
+            ? 0
+            : provider.map.values
+                //this returns List<num>
+                .map((a) => (a?.count ?? 0) * (a?.model.price ?? 0))
+                //this returns all the added num
+                .reduce((z, c) {
+                return z + c;
+              });
 
         final keys = provider.map.keys.toList();
+
+        // final dummyMap = {
+        //   "key_1": "value_1",
+        //   "key_2": "value_2",
+        //   "key_3": "value_3",
+        //   "key_4": "value_4",
+        //   "key_5": "value_5",
+        // };
+        // final kKeys = dummyMap.keys.toList();
+        // print("kKeys: ${kKeys}");
+        //
+        // kKeys.forEach((e) {
+        //   print("each value: ${dummyMap[e]}");
+        // });
 
         return SafeArea(
           child: Padding(
@@ -68,7 +84,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   ),
                 Expanded(
                   child: provider.map.keys.isEmpty
-                      ? Center(
+                      ? const Center(
                           child: Text("Cart is Empty"),
                         )
                       : ListView.separated(
@@ -78,6 +94,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           ),
                           itemBuilder: (_, i) {
                             final each = provider.map[keys[i]];
+
+                            // ({int call, bool text}) hello =
+                            //     (call: 10, text: true);
+                            // hello.call;
+                            // hello.text;
 
                             return ListTile(
                                 leading: ClipRRect(
@@ -107,7 +128,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Text(
-                                      each?.model.price?.convertToNaira() ?? "",
+                                      ((each?.count ?? 0) *
+                                              (each?.model.price ?? 0))
+                                          .convertToNaira(),
                                       style: style.copyWith(
                                         fontWeight: FontWeight.w600,
                                         color: AppColors.black,
@@ -160,30 +183,31 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           itemCount: keys.length,
                         ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Total",
-                        style: style.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.redColor,
-                          fontSize: 16,
+                if (provider.map.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Total",
+                          style: style.copyWith(
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.redColor,
+                            fontSize: 16,
+                          ),
                         ),
-                      ),
-                      Text(
-                        "N$total",
-                        style: style.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.black,
-                          fontSize: 20,
+                        Text(
+                          "N$total",
+                          style: style.copyWith(
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.black,
+                            fontSize: 20,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
                 SizedBox(
                   height: 30,
                 )
